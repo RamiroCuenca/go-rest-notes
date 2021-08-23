@@ -8,7 +8,8 @@ import (
 
 var sugar *zap.SugaredLogger
 
-func InitLogger() error {
+// initialize zap logger
+func InitZapLog() error {
 	l, err := zap.NewDevelopment()
 
 	if err != nil {
@@ -21,6 +22,7 @@ func InitLogger() error {
 	return nil
 }
 
+// Through this func. we use the logger over the app
 func ZapLog() *zap.SugaredLogger {
 	return sugar
 }
