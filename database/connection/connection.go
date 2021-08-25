@@ -10,10 +10,18 @@ type PostgreClient struct {
 	*sql.DB // database
 }
 
+const (
+	host     = "localhost"
+	port     = 5432
+	user     = "root"
+	password = "secret"
+	dbname   = "notes_db"
+)
+
 // Creates a connection with a postgre database
 // Should receive the source from it as a parameter
 func NewPostgreClient(source string) *PostgreClient {
-	db, err := sql.Open("postgre", source)
+	db, err := sql.Open("postgresql", source)
 
 	if err != nil {
 		// If we can not connect to the database, log the error and close the app with panic
