@@ -1,6 +1,9 @@
 package models
 
-import "time"
+import (
+	"errors"
+	"time"
+)
 
 // Note structure wich wi save at the db
 type Note struct {
@@ -19,6 +22,20 @@ type CreateNoteCMD struct {
 	Details string `json:"details"`
 }
 
-func ValidateCreateNoteCMD() {
+func (n CreateNoteCMD) Validate() error {
 
+	// Check if owner, title or details are empty
+	if n.Owner == "" {
+		return errors.New("You cant create a note with an empty owner")
+	}
+
+	if n.Title == "" {
+		return errors.New("You cant create a note with an empty title")
+	}
+
+	if n.Details == "" {
+		return errors.New("You cant create a note with an empty detail")
+	}
+
+	return nil
 }
