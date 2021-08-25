@@ -25,5 +25,9 @@ run-migrations-up:
 run-migrations-down:
 	migrate --path db/migration --database "postgresql://root:secret@localhost:5432/notes_db?sslmode=disable" --verbose down
 
+# This rule run the tests for app models
+go-run-test:
+	go test ./...
+
 # .PHONY tell explicitly to MAKE that those rules are not associated with files
-.PHONY: postgres createdb dropb run-migrations-up run-migrations-down
+.PHONY: container-create container-start container-stop createdb dropb run-migrations-up run-migrations-down go-run-test
