@@ -20,10 +20,10 @@ dropdb:
 
 # This rule runs the migrations up
 run-migrations-up:
-	migrate --path db/migration --database "postgresql://root:secret@localhost:5432/notes_db?sslmode=disable" --verbose up
+	migrate --path database/migrations --database "postgresql://root:secret@localhost:5432/notes_db?sslmode=disable" --verbose up
 
 run-migrations-down:
-	migrate --path db/migration --database "postgresql://root:secret@localhost:5432/notes_db?sslmode=disable" --verbose down
+	migrate --path database/migrations --database "postgresql://root:secret@localhost:5432/notes_db?sslmode=disable" --verbose down
 
 # This rule run the tests for app models
 go-run-test:
