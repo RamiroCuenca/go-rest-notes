@@ -1,6 +1,14 @@
 # Create the container with docker using the postgres image
-postgres:
+container-create:
 	docker run --name go-rest-notes -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres
+
+# Run the postgres container (So that we dont have to create a new one)
+container-start:
+	docker container start go-rest-notes
+
+# Stop the posgres container
+container-stop:
+	docker container stop go-rest-notes
 
 # This rule creates the db
 createdb:
