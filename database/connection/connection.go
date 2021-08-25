@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/RamiroCuenca/go-rest-notes/common/logger"
+	_ "github.com/lib/pq"
 )
 
 type PostgreClient struct {
