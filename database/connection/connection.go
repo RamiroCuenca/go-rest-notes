@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/RamiroCuenca/go-rest-notes/common/logger"
-	_ "github.com/lib/pq"
+	_ "github.com/lib/pq" // Dont forget to import it, it provides the drivers for postgres
 )
 
 type PostgreClient struct {
@@ -25,7 +25,7 @@ const (
 func NewPostgreClient() *PostgreClient {
 
 	// Log db credentials
-	logger.ZapLog().Infof("psql info: \nhost=%s\nport=%d\nuser=%s\npassword=%s\ndbname=%s\nsslmode=disable", host, port, user, password, dbname)
+	logger.ZapLog().Infof("\npsql info: \nhost =         %s\nport =         %d\nuser =         %s\npassword =     %s\ndbname =       %s\nsslmode =      disable", host, port, user, password, dbname)
 
 	// db source
 	source := fmt.Sprintf("host=%s port=%d user=%s "+
@@ -50,6 +50,8 @@ func NewPostgreClient() *PostgreClient {
 	if err != nil {
 		logger.ZapLog().Errorf("Error with the connection with the database. Reason: %v", err)
 	}
+
+	logger.ZapLog().Info("Connected to notes_db succesfully!\n")
 
 	// As there are no errors, return the database connection
 	return &PostgreClient{db}
