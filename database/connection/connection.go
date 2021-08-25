@@ -2,6 +2,7 @@ package connection
 
 import (
 	"database/sql"
+	"fmt"
 
 	"github.com/RamiroCuenca/go-rest-notes/common/logger"
 )
@@ -20,8 +21,21 @@ const (
 
 // Creates a connection with a postgre database
 // Should receive the source from it as a parameter
-func NewPostgreClient(source string) *PostgreClient {
-	db, err := sql.Open("postgresql", source)
+func NewPostgreClient() *PostgreClient {
+
+	// Log db credentials
+	logger.ZapLog().Infof("psql info: \nhost=%s\nport=%d\nuser=%s\npassword=%s\ndbname=%s\nsslmode=disable", host, port, user, password, dbname)
+
+	// db source
+	source := fmt.Sprintf("host=%s port=%d user=%s "+
+		"password=%s dbname=%s sslmode=disable",
+		host, port, user, password, dbname)
+
+	// Open method does not create the connection, it simply check if the arguments work
+	// That's why we MUST check with Ping() method if it's working!
+	db, err := sql.Open("postgres", source)
+	// Close DB after program exits
+	defer db.Close()
 
 	if err != nil {
 		// If we can not connect to the database, log the error and close the app with panic
