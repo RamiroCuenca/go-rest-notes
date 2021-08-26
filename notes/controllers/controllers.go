@@ -8,7 +8,7 @@ import (
 	"github.com/RamiroCuenca/go-rest-notes/notes/models"
 )
 
-type database struct {
+type Database struct {
 	*connection.PostgreClient
 }
 
@@ -16,7 +16,7 @@ type database struct {
 
 // Create is a method of the database client and it receives an CreateNoteCMD struc
 // and it return the created note or an error
-func (db *database) Create(cmd *models.CreateNoteCMD) (*models.Note, error) {
+func (db *Database) Create(cmd *models.CreateNoteCMD) (*models.Note, error) {
 
 	// We should follow these steps:
 	// 1- Start a transaction to the db.  ✅
@@ -67,7 +67,7 @@ func (db *database) Create(cmd *models.CreateNoteCMD) (*models.Note, error) {
 }
 
 // ReadAll is a method of the database client wich returns all notes
-func (db *database) ReadAll() ([]models.Note, error) {
+func (db *Database) ReadAll() ([]models.Note, error) {
 
 	// We should follow these steps:
 	// 1- Start the transaction to the db.
