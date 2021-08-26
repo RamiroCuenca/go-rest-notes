@@ -17,4 +17,12 @@ func main() {
 	if client != nil {
 		fmt.Print("Client connected succesfully")
 	}
+
+	// Get routes
+	mux := Routes()
+
+	// Start server with mux
+	server := NewServer(mux)
+
+	server.Run()
 }
